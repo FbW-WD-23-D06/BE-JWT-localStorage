@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
 const UserSchema = new Schema({
-  name: {
+  userName: {
     type: String,
     required: true,
   },
@@ -18,6 +18,11 @@ const UserSchema = new Schema({
   },
 });
 
+UserSchema.methods.toJSON = function () {
+  const user = this.toObject();
+  delete user.password;
+  return user;
+};
 export const User = model("User", UserSchema);
 
 export default UserSchema;

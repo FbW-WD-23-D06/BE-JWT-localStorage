@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
+import UserContext from "../context/UserContext.js";
+import axios from "axios";
 
 function Register() {
+  const { user, setUser } = useContext(UserContext);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = await axios.post("http://localhost:8888/users/register", user);
+    console.log(data);
+    try {
+    } catch (error) {}
+  };
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>UserName:</label>
         <input
           type="text"
