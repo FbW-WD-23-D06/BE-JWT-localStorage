@@ -41,7 +41,7 @@ const loginUser = async (req, res, next) => {
     }
     const payload = { userId: user.id };
     const token = jwt.sign(payload, process.env.SECRETKEY, {
-      expiresIn: "20s",
+      expiresIn: "50s",
     });
     console.log("token", token);
     return res.json({ token, msg: "You are logged in !" });
