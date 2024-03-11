@@ -1,7 +1,15 @@
 import { body } from "express-validator";
-import validate from "./validate.js";
+import { validate } from "./validate.js";
+import UserSchema from "../models/User.js";
+
+const requiredInputs = UserSchema.requiredPaths(); // ['name', 'email','password']
+
+const requiredInputsValidation = requiredInputs.map((input) => {
+  return body(input).exists().withMessage(`${input} is required`);
+}); // [body(email).existes().withMessage(),]
 
 const userValidationRules = [
+  ...requiredInputsValidation,
   body("userName", "Wrong Name!!")
     .isString()
     .withMessage("The username must be a string."),

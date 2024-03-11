@@ -1,8 +1,8 @@
 import express from "express";
 import "./config.js";
 import "./db-connection.js";
-import usersRouter from "./routes/usersRouter.js";
-import errorResponder from "./middleware/errorResponder.js";
+import usersRouter from "./routes/usersRoute.js";
+import errorResponder from "./middlewares/errorResponder.js";
 
 const app = express();
 const port = process.env.PORT || 5000;
