@@ -10,7 +10,7 @@ export const tokenValid = async (req, res, next) => {
     if (!token) {
       return next(createError(401, "no token"));
     }
-    const decode = await jwt.verify(token, process.env.SECRETKEY); // throw an error
+    const decode = jwt.verify(token, process.env.SECRETKEY); // throw an error
     return res.json(true);
     // req.user = decode;
     // next();

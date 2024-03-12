@@ -18,9 +18,7 @@ function Dashboard() {
         });
         console.log(data);
       } catch (error) {
-        if (error.status !== 200) {
-          navigate("/home");
-        }
+        navigate("/home");
       }
     };
     checkAdmin();
