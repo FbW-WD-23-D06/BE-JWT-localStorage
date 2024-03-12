@@ -6,19 +6,20 @@ import "../config.js";
 
 const registerUser = async (req, res, next) => {
   console.log(req.body);
-  const { userName, email, password } = req.body;
+  const { userName, email, password, role } = req.body;
   try {
     const userExists = await User.findOne({ email });
     if (userExists) {
       return next(createError(409, "user already exists!"));
     }
-    const saltRounds = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    // const saltRounds = await bcrypt.genSalt(10);
+    // const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     const user = new User({
       userName,
       email,
-      password: hashedPassword,
+      password,
+      role,
     });
     await user.save();
     const userWithoutPassword = user.toJSON(); // schema method
@@ -49,6 +50,9 @@ const loginUser = async (req, res, next) => {
     next(error);
   }
 };
-const getUser = (req, res) => {};
+const getUser = (req, res) => {
+  const userData = req.user;
+  res.json(userData);
+};
 
 export { registerUser, loginUser, getUser };

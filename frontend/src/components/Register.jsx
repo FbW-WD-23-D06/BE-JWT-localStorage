@@ -35,6 +35,13 @@ function Register() {
           placeholder="Password"
           onChange={(e) => setUser({ ...user, password: e.target.value })}
         />
+        <label>role:</label>
+        <input
+          type="text"
+          name="role"
+          placeholder="role"
+          onChange={(e) => setUser({ ...user, role: e.target.value })}
+        />
         <input type="submit" value="Register" id="btn-submit" />
       </form>
     </div>

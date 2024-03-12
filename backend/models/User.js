@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const { Schema, model } = mongoose;
 
@@ -16,6 +17,16 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: String,
+    enum: ["User", "Admin"],
+    default: "User",
+  },
+});
+
+UserSchema.pre("save", async function (next) {
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
 });
 
 UserSchema.methods.toJSON = function () {
