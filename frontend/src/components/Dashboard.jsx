@@ -17,11 +17,10 @@ function Dashboard() {
           headers: { "auth-token": token },
         });
         console.log(data);
-        if (data) {
+      } catch (error) {
+        if (error.status !== 200) {
           navigate("/home");
         }
-      } catch (error) {
-        console.log(error);
       }
     };
     checkAdmin();

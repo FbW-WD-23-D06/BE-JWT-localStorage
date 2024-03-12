@@ -5,7 +5,7 @@ export const isAdmin = async (req, res, next) => {
     const user = await User.findById(req.user.userId);
     const role = user.role;
     if (role !== "Admin") {
-      return res.status(404).json({ isAdmin: false });
+      return res.status(401).json({ isAdmin: false });
     }
     req.user = user;
     next();

@@ -5,11 +5,16 @@ import axios from "axios";
 function Register() {
   const { user, setUser } = useContext(UserContext);
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = await axios.post("http://localhost:8888/users/register", user);
-    console.log(data);
     try {
-    } catch (error) {}
+      e.preventDefault();
+      const data = await axios.post(
+        "http://localhost:8888/users/register",
+        user
+      );
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>
